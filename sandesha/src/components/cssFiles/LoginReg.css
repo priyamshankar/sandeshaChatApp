@@ -1,0 +1,27 @@
+body{
+    background-color: rgb(3, 70, 82);
+}
+
+.regisDiv{
+    background-color: rgb(73, 77, 86);
+    /* padding: 4vh; */
+    /* flex-wrap: wrap; */
+    margin: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.inputField{
+    border-radius: 1.5vh;
+    border-width: 0.7vh;
+
+    margin: 4vh;
+    width: 50vh;
+    height: 7vh;
+    text-align: center;
+    text-decoration: solid;
+    display: block;
+
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './cssFiles/LoginReg.css';
 
 const Regis = () => {
   const [name, setname] = useState();
@@ -15,22 +16,24 @@ const Regis = () => {
       <div>Registration</div>
       <div className="regisDiv">
         <form onSubmit={submit}>
-          <input
+          <input className="inputField" 
             type="text"
             value={name}
             onChange={(e) => setname(e.target.value)}
+            placeholder='Enter Name'
           />
-          <input
+          <input className="inputField"
             type="text"
             value={userName}
             onChange={(e) => setuserName(e.target.value)}
+            placeholder='User Name'
           />
-          <input
+          <input className="inputField"
             type="password"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
           />
-          <input
+          <input className="inputField"
             type="password"
             value={cnfPasswd}
             onChange={(e) => setcnfPasswd(e.target.value)}

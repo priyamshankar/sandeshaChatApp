@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './cssFiles/LoginReg.css';
 
 const Login = () => {
   const [userName, setuserName] = useState();
