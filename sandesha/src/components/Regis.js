@@ -1,42 +1,45 @@
 import React, { useState } from "react";
 
-const Login = () => {
+const Regis = () => {
+  const [name, setname] = useState();
   const [userName, setuserName] = useState();
   const [password, setpassword] = useState();
-
+  const [cnfPasswd, setcnfPasswd] = useState();
 
   const submit = (e) => {
     e.preventDefault();
-    // setuserName(password);
-    console.log(userName);
-    console.log(password);
   };
 
   return (
     <>
-      <p>Login</p>
-      <div className="formDiv">
+      <div>Registration</div>
+      <div className="regisDiv">
         <form onSubmit={submit}>
           <input
             type="text"
-            className="loginInput"
+            value={name}
+            onChange={(e) => setname(e.target.value)}
+          />
+          <input
+            type="text"
             value={userName}
-            placeholder="Enter the user id"
             onChange={(e) => setuserName(e.target.value)}
           />
-
           <input
             type="password"
-            className="loginPass"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
           />
-
-          <button type="submit">Login</button>
+          <input
+            type="password"
+            value={cnfPasswd}
+            onChange={(e) => setcnfPasswd(e.target.value)}
+          />
+          <button type="submit">Register</button>
         </form>
       </div>
     </>
   );
 };
 
-export default Login;
+export default Regis;
