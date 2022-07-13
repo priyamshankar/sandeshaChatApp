@@ -16,11 +16,11 @@ const Login = () => {
   return (
     <>
       <p>Login</p>
-      <div className="formDiv">
+      <div className="regisDiv">
         <form onSubmit={submit}>
           <input
             type="text"
-            className="loginInput"
+            className="inputField"
             value={userName}
             placeholder="Enter the user id"
             onChange={(e) => setuserName(e.target.value)}
@@ -28,7 +28,7 @@ const Login = () => {
 
           <input
             type="password"
-            className="loginPass"
+            className="inputField"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
           />
