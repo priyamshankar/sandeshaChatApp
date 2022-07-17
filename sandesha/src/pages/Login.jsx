@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link , useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,6 +12,13 @@ const Login = () => {
     userName: "",
     password: "",
   });
+
+  useEffect(() => {
+    if(localStorage.getItem('sandeshaUser')){
+      navigate('/');
+    }
+  }, [])
+  
 
   const regisChange = (event) => {
     setLogvalues({ ...logValues, [event.target.name]: event.target.value });
@@ -30,7 +37,7 @@ const Login = () => {
         toast.error(data.msg, toastOptions);
       }
       else if (data.status === true){
-        localStorage.setItem("sandeshaUser", JSON.stringify(data.users));
+        localStorage.setItem("sandeshaUser", JSON.stringify(data.usernameCheck));
         navigate("/");
       }
       // console.log(data);
@@ -46,7 +53,7 @@ const Login = () => {
   };
 
   const regValidation = () => {
-    const { password, confirmPassword, userName, email } = logValues;
+    const { password, userName } = logValues;
     if (password === "") {
       toast.error("enter the password", toastOptions);
     } else if (userName === "") {
