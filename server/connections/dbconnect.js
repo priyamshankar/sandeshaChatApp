@@ -13,9 +13,23 @@ mongoose.connect(process.env.DB_URL, {
 // user schema and colleciton are below this comment
 
 const sandeshaSchema = mongoose.Schema({
-  name: String,
-  userName: String,
-  password: String,
+  email:{
+    type: String,
+    required: true,
+    min:3,
+    unique: true,
+  },
+  userName: {
+    type: String,
+    required: true,
+    min: 3,
+    unique:true,
+  },
+  password: {
+    required: true,
+    type: String,
+    min:3,
+  }
 });
 
 const sandeshaModel = new mongoose.model("sandesha", sandeshaSchema);

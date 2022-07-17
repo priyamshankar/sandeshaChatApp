@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { registerRoute } from "../utils/APIRoutes";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [regValues, setregValues] = useState({
     userName: "",
     email: "",
@@ -23,12 +24,20 @@ const Register = () => {
     event.preventDefault();
     // regValidation();
     if (regValidation()) {
-      const { password, confirmPassword, userName, email } = regValues;
+      const { password, userName, email } = regValues;
       const { data } = await axios.post(registerRoute, {
         userName,
         email,
         password,
       });
+      if (data.status === false) {
+        toast.error(data.msg, toastOptions);
+      }
+      else if (data.status === true){
+        localStorage.setItem("sandeshaUser", JSON.stringify(data.users));
+        console.log("inside the data validation");
+        navigate("/");
+      }
       // console.log(data);
     }
   };
@@ -45,14 +54,11 @@ const Register = () => {
     const { password, confirmPassword, userName, email } = regValues;
     if (password !== confirmPassword) {
       toast.error("Password and confirm password didn't matched", toastOptions);
-    }
-    else if (email === "") {
+    } else if (email === "") {
       toast.error("Email field can't be left blank", toastOptions);
-    }
-    else if (userName === "") {
+    } else if (userName === "") {
       toast.error("Fill the user name.", toastOptions);
-    }
-    else{
+    } else {
       return true;
     }
 
