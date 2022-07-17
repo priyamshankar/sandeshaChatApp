@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { registerRoute } from "../utils/APIRoutes";
 
 const Register = () => {
   const [regValues, setregValues] = useState({
@@ -16,9 +18,19 @@ const Register = () => {
     setregValues({ ...regValues, [event.target.name]: event.target.value });
   };
 
-  const regSubmit = (event) => {
+  const regSubmit = async (event) => {
+    console.log("in validation", registerRoute);
     event.preventDefault();
-    regValidation();
+    // regValidation();
+    if (regValidation()) {
+      const { password, confirmPassword, userName, email } = regValues;
+      const { data } = await axios.post(registerRoute, {
+        userName,
+        email,
+        password,
+      });
+      // console.log(data);
+    }
   };
 
   const toastOptions = {
@@ -34,12 +46,17 @@ const Register = () => {
     if (password !== confirmPassword) {
       toast.error("Password and confirm password didn't matched", toastOptions);
     }
-    if (email === "") {
+    else if (email === "") {
       toast.error("Email field can't be left blank", toastOptions);
     }
-    if (userName === "") {
+    else if (userName === "") {
       toast.error("Fill the user name.", toastOptions);
     }
+    else{
+      return true;
+    }
+
+    return false;
   };
 
   return (
