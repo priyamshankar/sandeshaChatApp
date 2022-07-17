@@ -5,9 +5,4 @@ const router = require("express").Router();
 
 router.post("/register",register);
 
-
-router.get("/reg",(req,res)=>{
-    res.send("this is the slash page");
-});
-
 module.exports = router;
