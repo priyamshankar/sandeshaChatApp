@@ -25,7 +25,7 @@ module.exports.register = async (req, res, next) => {
       email,
       userName,
       password: hashedPassword,
-    // password
+      // password
     });
     delete user.password;
     return res.json({ status: true, users });
@@ -35,30 +35,43 @@ module.exports.register = async (req, res, next) => {
   }
 };
 
-
 module.exports.login = async (req, res, next) => {
-    // console.log(req.body);
-    try {
-      const { userName,  password } = req.body;
-      const usernameCheck = await user.findOne({ userName });
-      if (!usernameCheck) {
-        return res.json({
-          msg: "Incorrect Username or password",
-          status: false,
-        });
-      }
-      const passwordCheck =await bcrypt.compare(password, usernameCheck.password)
-      if (!passwordCheck) {
-        return res.json({
-          msg: "incorrect username or password",
-          status: false,
-        });
-      }
-      
-      delete user.password;
-      return res.json({ status: true, usernameCheck });
-    } catch (e) {
-      // console.log(e);
-      next(e);
+  // console.log(req.body);
+  try {
+    const { userName, password } = req.body;
+    const usernameCheck = await user.findOne({ userName });
+    if (!usernameCheck) {
+      return res.json({
+        msg: "Incorrect Username or password",
+        status: false,
+      });
     }
-  };
+    const passwordCheck = await bcrypt.compare(
+      password,
+      usernameCheck.password
+    );
+    if (!passwordCheck) {
+      return res.json({
+        msg: "incorrect username or password",
+        status: false,
+      });
+    }
+
+    delete user.password;
+    return res.json({ status: true, usernameCheck });
+  } catch (e) {
+    // console.log(e);
+    next(e);
+  }
+};
+
+module.exports.getAllusers = async (req, res, next) => {
+  try {
+    const users = await user
+      .find({ _id: { $ne: req.params.id } })
+      .select(["email", "userName", "_id"]);
+    return res.json(users);
+  } catch (e) {
+    next(e);
+  }
+};
