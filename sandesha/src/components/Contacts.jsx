@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function Contacts({ contacts, currentUser }) {
+function Contacts({ contacts, currentUser, changeChat}) {
   const [currentUserName, setcurrentUserName] = useState(undefined);
   const [currentUserImage, setcurrentUserImage] = useState(undefined);
 
@@ -14,7 +14,10 @@ function Contacts({ contacts, currentUser }) {
     }
   }, [currentUser]);
 
-  const changeCurrentChat = (index, contact) => {};
+  const changeCurrentChat = (index, contact) => {
+    setCurrentSelected(index);
+    changeChat(contact);
+  };
 
   return (
     <>
@@ -31,6 +34,9 @@ function Contacts({ contacts, currentUser }) {
                     index === currentSelected ? "selected" : ""
                   }`}
                   key={index}
+                  onClick={()=>{
+                    changeCurrentChat(index,contact);
+                  }}
                 >
                   <div className="username">
                     <h3>{contact.userName}</h3>
@@ -40,13 +46,13 @@ function Contacts({ contacts, currentUser }) {
               );
             })}
           </div>
+          <div className="current-user">
+            <div className="username">
+              <h2>{currentUserName}</h2>
+            </div>
+          </div>
         </Container>
       )}
-      <div className="current-user">
-        <div className="username">
-          <h1>{currentUserName}</h1>
-        </div>
-      </div>
     </>
   );
 }
@@ -69,15 +75,60 @@ const Container = styled.div`
     }
   }
 
-  .contacts{
+  .contacts {
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    gap: 0.8 rem;
-    .contact{
-        background-color: #ffffff39;
+    gap: 0.8 rem;&::-webkit-scrollbar{
+        width: 0.2rem;
+        &-thumb{
+            background-color: #ffffff39;
+            width: 0.1rem;
+            boder-radius: 0.1rem;
+        }
     }
+    .contact {
+      background-color: #ffffff39;
+      min-height: 5rem;
+      width: 90%;
+      cursor: pointer;
+      border-radius: 0.2rem;
+      padding: 0.4 rem;
+      margin: 0.4rem;
+      gap: 1rem;
+      align-items: center;
+      display: flex;
+      transition: 0.3s ease-in-out;
+      .username {
+        h3 {
+          color: white;
+        }
+      }
+    }
+    .selected {
+      background-color: #9186f3;
+    }
+  }
+  .current-user {
+    background-color: #0d0d30;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    .username {
+      h2 {
+        color: white;
+      }
+    }
+    @media screen and (min-width: 720px) and (max-width: 1080px) {
+        gap : 0.5rem;
+        .username {
+            h2{
+                font-size: 1rem;
+            }
+        }
+    }
+
   }
 `;
 export default Contacts;

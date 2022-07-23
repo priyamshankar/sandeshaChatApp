@@ -4,11 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { allUsersRoute } from "../utils/APIRoutes";
 import Contacts from "../components/Contacts";
+import ChatContainer from "../components/ChatContainer";
 
 function Chat() {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [CurrentUser, setCurrentUser] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(undefined);
   useEffect(() => {
     (async () => {
       if (await !localStorage.getItem("sandeshaUser")) {
@@ -28,12 +30,17 @@ function Chat() {
     })();
   }, [CurrentUser]);
 
+  const handleChatChange = (chat)=>{
+    setCurrentChat(chat);
+    // console.log(chat);
+  };
+
   return (
     <>
       <Container>
         <div className="container">
-          <Contacts contacts={contacts} currentUser={CurrentUser} />
-          {/* <Contacts/> */}
+          <Contacts contacts={contacts} currentUser={CurrentUser} changeChat={handleChatChange}/>
+        <ChatContainer currentUser= {CurrentUser} currentChat= {currentChat}/>
         </div>
       </Container>
     </>
@@ -55,7 +62,7 @@ const Container = styled.div`
     width: 85vw;
     background-color: #0f2731;
     display: grid;
-    grid-template-column: 25% 75%;
+    grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-column: 35% 65%;
     }
