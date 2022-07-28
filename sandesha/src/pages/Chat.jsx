@@ -33,7 +33,6 @@ function Chat() {
 
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
-    // console.log(chat);
   };
 
   return (
@@ -46,7 +45,6 @@ function Chat() {
             changeChat={handleChatChange}
           />
           <ChatContainer currentUser={CurrentUser} currentChat={currentChat} />
-          {/* {console.log(CurrentUser)} */}
         </div>
       </Container>
     </>
@@ -75,3 +73,5 @@ const Container = styled.div`
   }
 `;
 export default Chat;
+
+// end encryption using diffie hellman key exchange algorithm

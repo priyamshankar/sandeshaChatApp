@@ -55,6 +55,7 @@ const Container = styled.div`
   background-color: #088f8f;
   padding: 0 2rem;
   padding-bottom: 0.3rem;
+  
   .button-container {
     display: flex;
     align-items: center;
@@ -96,7 +97,6 @@ const Container = styled.div`
     background-color: #ffffff34;
     input{
         width: 90%;
-        height: 60%;
         background-color: transparent;
         color: white;
         border: none;

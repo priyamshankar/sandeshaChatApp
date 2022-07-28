@@ -6,35 +6,25 @@ import axios from "axios";
 import { getAllMessageRoute, sendMessageRoute } from "../utils/APIRoutes";
 
 function ChatContainer({ currentUser, currentChat }) {
-  const [messages, setmessages] = useState([]);
-
-  const [currUser, setcurrUser] = useState(currentUser);
-  const [currChat, setcurrChat] = useState(currentChat);
-
-  useEffect(() => {
-    // (async () => {
-    setcurrChat(currentChat);
-    setcurrUser(currentUser);
-    // })();
-  }, [currentChat]);
-
   useEffect(() => {
     (async () => {
       try {
-        if (currUser) {
+        if (currentUser) {
           const response = await axios.post(getAllMessageRoute, {
-            from: currUser._id,
-            to: currChat._id,
+            from: currentUser._id,
+            to: currentChat._id,
           });
           setmessages(response.data);
         } else {
-          setcurrUser(currentUser);
+          console.log("test");
         }
       } catch (e) {
         console.log(e);
       }
     })();
   }, [currentChat]);
+
+  const [messages, setmessages] = useState([]);
 
   const handleSendMsg = async (msg) => {
     try {
@@ -58,13 +48,13 @@ function ChatContainer({ currentUser, currentChat }) {
                 <h3>{currentChat.userName}</h3>
               </div>
             </div>
-          <Logout />
+            <Logout />
           </div>
           {/* {console.log(messages)} */}
           <div className="chat-messages">
             {messages.map((message, index) => {
               return (
-                <div>
+                <div key={index}>
                   {/* {console.log(message.id)} */}
                   <div
                     className={`message ${
@@ -72,7 +62,7 @@ function ChatContainer({ currentUser, currentChat }) {
                     }`}
                     key={index}
                   >
-                    <div className="content">
+                    <div className="content" key={index}>
                       <p key={index}>{message.message}</p>
                     </div>
                   </div>
@@ -93,6 +83,10 @@ const Container = styled.div`
   grid-template-rows: 10% 78% 12%;
   gap: 0.1rem;
   overflow: hidden;
+  // flex-direction : column-reverse;
+  @media screen and (min-width: 720px) and (max-width: 1080px) {
+    grid-auto-rows: 15% 70% 15%;
+  }
   .chat-header {
     display: flex;
     justify-content: space-between;
@@ -126,8 +120,11 @@ const Container = styled.div`
         border-radius: 1rem;
         color: white;
       }
+      .recieved {
+        max-width: 40%;
+      }
     }
-    
+
     .sended {
       justify-content: flex-end;
       .content {
@@ -135,10 +132,10 @@ const Container = styled.div`
       }
     }
     .recieved {
-      // max-width: 40%;
-      
       justify-content: flex-start;
-      background-color: darkgreen;
+      .content {
+        background-color: darkgreen;
+      }
     }
   }
 `;
