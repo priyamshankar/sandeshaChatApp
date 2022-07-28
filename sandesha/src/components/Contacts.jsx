@@ -84,7 +84,7 @@ const Container = styled.div`
         &-thumb{
             background-color: #ffffff39;
             width: 0.1rem;
-            boder-radius: 0.1rem;
+            border-radius: 0.5rem;
         }
     }
     .contact {

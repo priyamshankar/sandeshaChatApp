@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { allUsersRoute } from "../utils/APIRoutes";
+import { allUsersRoute, host } from "../utils/APIRoutes";
 import Contacts from "../components/Contacts";
 import ChatContainer from "../components/ChatContainer";
+import { io } from "socket.io-client";
 
 function Chat() {
+  const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [CurrentUser, setCurrentUser] = useState(undefined);
@@ -21,6 +23,13 @@ function Chat() {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (CurrentUser) {
+      socket.current = io(host);
+      socket.current.emit("add-user", CurrentUser._id);
+    }
+  }, [CurrentUser]);
 
   useEffect(() => {
     (async () => {
@@ -44,7 +53,11 @@ function Chat() {
             currentUser={CurrentUser}
             changeChat={handleChatChange}
           />
-          <ChatContainer currentUser={CurrentUser} currentChat={currentChat} />
+          <ChatContainer
+            currentUser={CurrentUser}
+            currentChat={currentChat}
+            socket={socket}
+          />
         </div>
       </Container>
     </>
@@ -67,8 +80,10 @@ const Container = styled.div`
     background-color: #0f2731;
     display: grid;
     grid-template-columns: 25% 75%;
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
+    @media screen and (min-width: 560px) and (max-width: 1080px) {
       grid-template-column: 35% 65%;
+      height: 98vh;
+      width: 98vw;
     }
   }
 `;
