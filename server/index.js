@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit("msg-recieve", data.message);
     }
-    // console.log(data);
+    console.log(data);
   });
 });
 
