@@ -52,10 +52,10 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 5% 95%;
   align-items: center;
-  background-color: #088f8f;
+  /* background-color: #088f8f; */
   padding: 0 2rem;
   padding-bottom: 0.3rem;
-  
+
   .button-container {
     display: flex;
     align-items: center;

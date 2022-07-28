@@ -20,7 +20,7 @@ justify-content: center;
 align-items: center;
 padding: 0.5rem;
 border-radius:0.5rem;
-background-color: green;
+background-color: #ea5252;
 border: none;
 cursor: pointer;
 

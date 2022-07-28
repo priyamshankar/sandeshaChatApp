@@ -80,8 +80,12 @@ const Container = styled.div`
     background-color: #0f2731;
     display: grid;
     grid-template-columns: 25% 75%;
-    @media screen and (min-width: 560px) and (max-width: 1080px) {
-      grid-template-column: 35% 65%;
+    @media screen and (min-width: 680px) and (max-width: 1080px) {
+      height: 98vh;
+      width: 98vw;
+    }
+    @media screen and (min-width: 120px) and (max-width: 680px) {
+      grid-template-columns: 45% 55%;
       height: 98vh;
       width: 98vw;
     }

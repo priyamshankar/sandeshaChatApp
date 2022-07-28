@@ -108,9 +108,9 @@ function ChatContainer({ currentUser, currentChat, socket }) {
 }
 
 const Container = styled.div`
-  padding-top: 1rem;
+  /* padding-top: 1rem; */
   display: grid;
-  grid-template-rows: 10% 78% 12%;
+  grid-template-rows: 10% 82% 8%;
   gap: 0.1rem;
   overflow: hidden;
   // flex-direction : column-reverse;
@@ -122,6 +122,8 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    background-color: #004146;
+
     .user-details {
       display: flex;
       align-items: center;
@@ -141,7 +143,7 @@ const Container = styled.div`
     overflow: auto;
     &::-webkit-scrollbar {
       width: 0.2rem;
-      &-thumb{
+      &-thumb {
         background-color: #ffffff39;
         width: 0.1rem;
         border-radius: 1rem;
@@ -166,13 +168,13 @@ const Container = styled.div`
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: green;
+        background-color: #0d9e69;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: darkgreen;
+        background-color: #004146;
       }
     }
   }

@@ -58,9 +58,9 @@ function Contacts({ contacts, currentUser, changeChat}) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 75% 15%;
+  grid-template-rows: 10% 85% 5%;
   overflow: hidden;
-  background-color: #080420;
+  background-color: #004146;
 
   .brand {
     display: flex;
@@ -89,12 +89,12 @@ const Container = styled.div`
     }
     .contact {
       background-color: #ffffff39;
-      min-height: 5rem;
+      min-height: 3rem;
       width: 90%;
       cursor: pointer;
       border-radius: 0.2rem;
-      padding: 0.4 rem;
-      margin: 0.4rem;
+      padding: 1.4rem;
+      margin: 0.3rem;
       gap: 1rem;
       align-items: center;
       display: flex;
@@ -106,11 +106,11 @@ const Container = styled.div`
       }
     }
     .selected {
-      background-color: #9186f3;
+      background-color: #86f38d;
     }
   }
   .current-user {
-    background-color: #0d0d30;
+    background-color: #0d9e69;
     display: flex;
     justify-content: center;
     gap: 2rem;
@@ -119,15 +119,14 @@ const Container = styled.div`
         color: white;
       }
     }
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
+    @media screen and (min-width: 120px) and (max-width: 1080px) {
         gap : 0.5rem;
         .username {
             h2{
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
         }
     }
-
   }
 `;
 export default Contacts;
