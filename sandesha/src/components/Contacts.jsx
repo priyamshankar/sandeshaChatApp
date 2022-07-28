@@ -40,7 +40,6 @@ function Contacts({ contacts, currentUser, changeChat}) {
                 >
                   <div className="username">
                     <h3>{contact.userName}</h3>
-                    {/* {console.log(contact)} */}
                   </div>
                 </div>
               );

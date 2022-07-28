@@ -17,6 +17,7 @@ function Chat() {
         navigate("/login");
       } else {
         setCurrentUser(await JSON.parse(localStorage.getItem("sandeshaUser")));
+        // console.log(CurrentUser);
       }
     })();
   }, []);
@@ -30,7 +31,7 @@ function Chat() {
     })();
   }, [CurrentUser]);
 
-  const handleChatChange = (chat)=>{
+  const handleChatChange = (chat) => {
     setCurrentChat(chat);
     // console.log(chat);
   };
@@ -39,8 +40,13 @@ function Chat() {
     <>
       <Container>
         <div className="container">
-          <Contacts contacts={contacts} currentUser={CurrentUser} changeChat={handleChatChange}/>
-        <ChatContainer currentUser= {CurrentUser} currentChat= {currentChat}/>
+          <Contacts
+            contacts={contacts}
+            currentUser={CurrentUser}
+            changeChat={handleChatChange}
+          />
+          <ChatContainer currentUser={CurrentUser} currentChat={currentChat} />
+          {/* {console.log(CurrentUser)} */}
         </div>
       </Container>
     </>
